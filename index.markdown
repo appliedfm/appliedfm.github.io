@@ -11,7 +11,7 @@ header:
 excerpt: "Supporting open source projects in the Coq ecosystem."
 
 intro: 
-  - excerpt: 'Coq is a functional programming language & proof assistant. We are using it to make computing better. [Find out more](/about/).'
+  - excerpt: 'Mechanized logic is transforming computer science. We are working to help make it happen. [Find out more](/about/).'
 
 feature_row:
   - image_path: /assets/images/rooster-unsplash-michael-anfang.jpg
