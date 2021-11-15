@@ -1,7 +1,7 @@
 ---
 # layout: post
 title:  "Applying categories"
-# date:   2021-11-22 6:00:00 -0800
+# date:   2021-11-21 22:00:00 -0800
 categories: category-theory
 ---
 

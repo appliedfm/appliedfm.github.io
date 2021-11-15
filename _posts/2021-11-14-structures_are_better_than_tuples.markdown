@@ -1,7 +1,7 @@
 ---
 # layout: post
 title:  "Structures are better than tuples"
-date:   2021-11-08 6:00:00 -0800
+date:   2021-11-14 22:00:00 -0800
 categories: coq best-practices
 ---
 
