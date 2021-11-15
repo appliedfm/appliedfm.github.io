@@ -9,7 +9,7 @@ permalink: /resources/
 
 ## Open source libraries
 
-* [Awesome Coq Projects](https://github.com/sindresorhus/awesome#readme)
+* [Awesome Coq Projects](https://github.com/coq-community/awesome-coq#readme)
 * [Recent GitHub Activity](https://github.com/search?o=desc&q=language%3Acoq&s=updated&type=Repositories)
 
 ## Books
