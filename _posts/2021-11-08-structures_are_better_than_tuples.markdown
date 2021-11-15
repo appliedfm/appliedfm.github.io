@@ -20,11 +20,11 @@ For various reasons, Coq has 3 tuple-like types:
 
 * **Products**. This is what people usually mean when they say "tuple." They look simple but don't be fooled: they are actually very confusing. Quick, what does `snd (fst (1, 2, 4))` evaluate to? If you want to insert a new field between `2` and `4`, what changes would you need to make to this code?
 * **Conjunction**. Sorry, but `P /\ Q` is just as bad as `P * Q` and `conj a b` is just as bad as `(a, b)`. Yes, I know the logic tactics know how to handle conjunction. No, I don't think that's a good enough reason to pay the tuple price.
-* **Sigma**. It always looks so innocent in the beginning: `{ x: nat | x <> 0 }`. Then one day, someone needs to add an additional datum or condition. _No problem!_ they shout as they toss in a tuple up front and some `/\` in the back. Hope you like updating `match` and `destruct` patterns!
+* **Sigma**. It always looks so innocent in the beginning: `{ x: nat | x <> 0 }`. Then one day, someone needs to add an additional datum or condition. _No problem!_ they shout as they toss in a product up front and some `/\` in the back. Hope you like updating `match` and `destruct` patterns!
 
 These types all suffer from the same maintenance problems:
 
-1. They make the code less readable by filling it with generic names like `fst`, `snd`, `proj1`, `proj2`, `proj1_sig`, `proj2_sig`, `conj`, `exist`, etc. Excessive use of these functions makes it _very difficult_ to search/grep for call sites. They also inhibit readability by obscuring intent. They force engineers to remember which projections go with which types, which encourages proof engineers to write ad-hoc `destruct` patterns in their proofs, which further inhibits readability.
+1. They make the code less readable by filling it with generic names like `fst`, `snd`, `proj1`, `proj2`, `proj1_sig`, `proj2_sig`, `conj`, `exist`, (we will look at some examples in a bit). Excessive use of these functions makes it _very difficult_ to search/grep for call sites. They also inhibit readability by obscuring intent. They force engineers to remember which projections go with which types, which encourages proof engineers to write ad-hoc `destruct` patterns in their proofs, which further inhibits readability.
 2. They make it difficult to amend or change definitions. This is especially bad for libraries: if you are a library maintainer and your public interfaces use tuples, you are basically _guaranteeing_ serious pain for your downstream users if you ever need to make changes.
 
 In a collaborative engineering context it is imperative that we prioritize readability & maintainability. Excessive use of tuples works against this by making it harder for people to read, understand, maintain, and contribute to code.
@@ -44,7 +44,7 @@ Structure Pointer: Type := {
 
 Now let me ask:
 
-* Isn't that beautiful? Don't you just love how readable it is?
+* Don't you love how readable it is?
 * Did you notice how _informative_ and _consistent_ the names are?
   * Did you notice the different conventions (`CamelCase` versus `snake_case`) for types and projections?
   * Can you guess the relationship between the name of the structure and the name of the projections?
@@ -57,7 +57,7 @@ Now let me ask:
 
 Anyway, let's try building one of these things.
 
-As you can see, the special structure syntax (together with `refine` or `Program Definition`) yields code that is _extremely_ easy to maintain:
+The special structure syntax (together with either `refine` or `Program Definition`) yields code that is _extremely_ easy to maintain:
 
 ```coq
 (* Using refine *)
@@ -69,26 +69,39 @@ refine {|
     pointer_offset__nonneg := _;
 |}.
 Proof.
-  { (* Time to prove pointer_offset__align ... *) }
-  { (* Time to prove pointer_offset__nonneg ... *) }
+  { (* pointer_offset__align ... *) }
+  { (* pointer_offset__nonneg ... *) }
 Qed.
 
-(* Using Program Definition *)
+(* Alternative approach using Program Definition *)
 Program Definition my_other_pointer: Pointer := {|
     pointer_base := my_other_ptr_base;
     pointer_offset := my_other_ptr_offset;
 |}.
-Next Obligation. (* Time to prove pointer_offset__align ... *) Qed.
-Next Obligation. (* Time to prove pointer_offset__nonneg ... *) Qed.
+Next Obligation. (* pointer_offset__align ... *) Qed.
+Next Obligation. (* pointer_offset__nonneg ... *) Qed.
 ```
 
-So readable. So maintainable. You gotta love it.
+So readable. So maintainable.
 
-# Just for comparison ...
+But that's not all! Structures also interact nicely with `match ... end`. In this next example we match on _some_ of the structure's fields:
+
+```coq
+Definition pointer_base_is_zero (x: Pointer):
+    bool
+ := match x with
+    | {| pointer_base := 0%Z |} => true
+    | _ => false
+    end.
+```
+
+This was an easy function to write: I did not need to remind myself how to construct a `Pointer`; I just needed the name of the field I cared about.
+
+# Tuples are not great
 
 Now let's build the same type using tuples and see how it compares.
 
-First, note that we need to use a tuple, a conjunction, _and_ a sigma type to replicate `Pointer`:
+First, note that we need to use a product, a conjunction, _and_ a sigma type to replicate `Pointer`:
 
 ```coq
 Definition HorribleDisaster: Type
@@ -98,8 +111,10 @@ Definition HorribleDisaster: Type
 I agree that this definition looks _cool_. However, every other definition around it looks _extremely uncool_. Let's start with the primitive projections:
 
 ```coq
-Definition pointer_base (x: HorribleDisaster): Z := fst x.
-Definition pointer_offset (x: HorribleDisaster): Z := proj1_sig (snd x).
+Definition pointer_base (x: HorribleDisaster): Z
+ := fst x.
+Definition pointer_offset (x: HorribleDisaster): Z
+ := proj1_sig (snd x).
 
 Definition pointer_offset__align (x: HorribleDisaster):
     Zmod (pointer_offset x) 8 = 0
@@ -130,31 +145,46 @@ This constructor can be used with `apply` and `Program Define`. However, since i
 Take a look:
 
 ```coq
+(* Using apply *)
 Definition my_pointer: HorribleDisaster.
 apply (build_HorribleDisaster my_ptr_base my_ptr_offset).
 Proof.
-    { (* Time to prove pointer_offset__align ... *) }
-    { (* Time to prove pointer_offset__nonneg ... *) }
+    { (* pointer_offset__align ... *) }
+    { (* pointer_offset__nonneg ... *) }
 Qed.
 
+(* Alternative approach using Program Definition *)
 Program Definition my_other_pointer: HorribleDisaster
  := build_HorribleDisaster my_ptr_base my_ptr_offset _ _.
-Next Obligation. (* Time to prove pointer_offset__align ... *) Qed.
-Next Obligation. (* Time to prove pointer_offset__nonneg ... *) Qed.
+Next Obligation. (* pointer_offset__align ... *) Qed.
+Next Obligation. (* pointer_offset__nonneg ... *) Qed.
 ```
 
-Destruct patterns are probably the worst thing about tuples. Let's take a look at the destruct pattern for this type:
+Destruct patterns are probably the worst thing about tuples:
 
 ```coq
 Lemma i_hate_destruct (x: HorribleDisaster):
     0 <= pointer_offset x.
 Proof.
-    destruct x as [x_base [x_offset [Hx_offset__align Hx_offset__nonneg]]].
+    destruct x as [
+        x_base
+        [
+            x_offset
+            [
+                Hx_offset__align
+                Hx_offset__nonneg
+            ]
+        ]
+    ].
     exact Hx_offset__nonneg.
 Qed.
 ```
 
-Now imagine having to update _that_ pattern in a bunch of random files. Hope you like figuring out where the new `[` and `]` need to go!
+This pattern is bad:
+* There's no pretty way to format it. Tuples are all about _pairs_, and if you have more than 2 things you care about, you're going to have a problem making the `[` and `]` look nice.
+* If we had to add a field to the `HorribleDisaster` type, this destruct pattern would be particularly obnoxious to edit.
+
+Unfortunately, these challenges apply to `match ... end` cases as well.
 
 # But what about standard library functions?
 
@@ -164,6 +194,25 @@ However, the benefit of reusing these combinators is outweighed by the cost of m
 
 In my experience, you're going to need to define some helper lemmas _no matter which data structure you use_, so you might as well use a data structure that's easy to read & maintain. _Code reuse is good, but not if it obfuscates readability or intent._
 
+# Can I use tuples internally but expose a non-tuple interface publicly?
+
+If you really want to, sure. You can do this with type classes, modules, opaque definitions, etc.
+
+(If you've had success with this, please reach out!)
+
 # Conclusion
+
+* Communicating intent
+    * Tuples obfuscate intent by filling code with generic projections & constructors (`fst`, `proj1`, `proj1_sig`, `conj`, `exist`, etc).
+    * Structures communicate intent through named fields.
+* Construction
+    * Tuples are hard to construct because they're often the wrong "shape" for the data.
+    * Structures are easy to construct because there's a special syntax for doing so.
+* Projection
+    * Tuples force you to write your own projections. This is tedious.
+    * Structures provide projections automatically.
+* Matching & destructing
+    * Tuples are hard to match & destruct again due to their shape.
+    * Structures are easier to destruct and even easier to `match`.
 
 Structures are better than tuples.

@@ -27,6 +27,12 @@ Proof.
   { (* Time to prove pointer_offset__nonneg ... *) admit. }
 Admitted.
 
+Definition pointer_base_is_zero (x: Pointer):
+    bool
+ := match x with
+    | {| pointer_base := 0%Z |} => true
+    | _ => false
+    end.
 
 Axiom my_other_ptr_base: Z.
 Axiom my_other_ptr_offset: Z.
