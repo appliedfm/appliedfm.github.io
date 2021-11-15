@@ -147,7 +147,7 @@ Take a look:
 ```coq
 (* Using apply *)
 Definition my_pointer: HorribleDisaster.
-apply (build_HorribleDisaster my_ptr_base my_ptr_offset).
+apply (Build_HorribleDisaster my_ptr_base my_ptr_offset).
 Proof.
     { (* pointer_offset__align ... *) }
     { (* pointer_offset__nonneg ... *) }
@@ -155,7 +155,7 @@ Qed.
 
 (* Alternative approach using Program Definition *)
 Program Definition my_other_pointer: HorribleDisaster
- := build_HorribleDisaster my_ptr_base my_ptr_offset _ _.
+ := Build_HorribleDisaster my_ptr_base my_ptr_offset _ _.
 Next Obligation. (* pointer_offset__align ... *) Qed.
 Next Obligation. (* pointer_offset__nonneg ... *) Qed.
 ```
