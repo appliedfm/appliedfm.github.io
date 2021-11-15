@@ -59,11 +59,11 @@ Module TupleTime.
     Definition pointer_base (x: HorribleDisaster): Z := fst x.
     Definition pointer_offset (x: HorribleDisaster): Z := proj1_sig (snd x).
 
-    Definition pointer_offset__align (x: HorribleDisaster):
+    Lemma pointer_offset__align (x: HorribleDisaster):
         Zmod (pointer_offset x) 8 = 0
      := proj1 (proj2_sig (snd x)).
 
-    Definition pointer_offset__nonneg (x: HorribleDisaster):
+    Lemma pointer_offset__nonneg (x: HorribleDisaster):
         0 <= pointer_offset x
      := proj2 (proj2_sig (snd x)).
 

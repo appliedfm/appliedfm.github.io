@@ -116,16 +116,16 @@ Definition pointer_base (x: HorribleDisaster): Z
 Definition pointer_offset (x: HorribleDisaster): Z
  := proj1_sig (snd x).
 
-Definition pointer_offset__align (x: HorribleDisaster):
+Lemma pointer_offset__align (x: HorribleDisaster):
     Zmod (pointer_offset x) 8 = 0
  := proj1 (proj2_sig (snd x)).
 
-Definition pointer_offset__nonneg (x: HorribleDisaster):
+Lemma pointer_offset__nonneg (x: HorribleDisaster):
     0 <= pointer_offset x
  := proj2 (proj2_sig (snd x)).
 ```
 
-Oh my, looks like somebody had to figure out the right way to fit all those `fst`, `snd,` and `proj*_*` functions together. Glad I don't need to maintain _that_ code!
+Looks like somebody had to figure out the right way to fit all those `fst`, `snd,` and `proj*_*` functions together. Glad I don't need to maintain _that_ code!
 
 Now let's look at the constructor:
 
