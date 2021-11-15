@@ -5,8 +5,8 @@ header:
   overlay_filter: "0.5"
   overlay_image: /assets/images/rooster-unsplash-ilona-frey.jpg
   actions:
-    - label: "Get Coq"
-      url: "https://coq.inria.fr/download"
+    - label: "About Us"
+      url: "/about/"
   caption: "Photo by [Ram Kumar](https://unsplash.com/@ramkumar810) on Unsplash"
 excerpt: "Supporting open source projects in the Coq ecosystem."
 

@@ -3,7 +3,9 @@ title: Resources
 permalink: /resources/
 ---
 
-For a more complete list, check out _[Awesome Coq](https://github.com/coq-community/awesome-coq#readme)_.
+## Community
+
+* [Coq on Zulip](http://coq.zulipchat.com/)
 
 ## Downloads
 

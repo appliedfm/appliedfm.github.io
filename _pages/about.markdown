@@ -13,7 +13,14 @@ Widespread adoption of mechanized logic by open source & industry.
 
 ## Strategy
 
-Add value & reduce barriers to entry.
+Add value & reduce barriers to adoption.
+* Support tech transition from research to applications.
+* Identify and resolve pain points for working engineers.
+* Promote interoperability & compatibility with existing infrastructure.
+
+## Contributors
+
+* [Tim Carstens](https://www.linkedin.com/in/intoverflow/)
 
 ## Get involved
 
