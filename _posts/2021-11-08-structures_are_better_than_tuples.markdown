@@ -90,7 +90,7 @@ But that's not all! Structures also interact nicely with `match ... end`. In thi
 Definition pointer_base_is_zero (x: Pointer):
     bool
  := match x with
-    | {| pointer_base := 0%Z |} => true
+    | {| pointer_base := 0 |} => true
     | _ => false
     end.
 ```
@@ -160,7 +160,7 @@ Next Obligation. (* pointer_offset__align ... *) Qed.
 Next Obligation. (* pointer_offset__nonneg ... *) Qed.
 ```
 
-Destruct patterns are probably the worst thing about tuples:
+Lastly, destruct patterns are probably the worst thing about tuples:
 
 ```coq
 Lemma i_hate_destruct (x: HorribleDisaster):
@@ -180,15 +180,16 @@ Proof.
 Qed.
 ```
 
-This pattern is bad:
-* There's no pretty way to format it. Tuples are all about _pairs_, and if you have more than 2 things you care about, you're going to have a problem making the `[` and `]` look nice.
-* If we had to add a field to the `HorribleDisaster` type, this destruct pattern would be particularly obnoxious to edit.
+This is bad:
+* Even when it all fits on one line, there's no pretty way to format it. Tuples are all about _pairs_, and if you have more than 2 things you care about, you're going to have a problem making the `[` and `]` look nice.
+* If we ever need to add a field to the `HorribleDisaster` type, this pattern would be obnoxious to edit.
+* This pattern is 10 lines long (in contrast to the definition of the `Pointer` structure, which is only 6 lines long.)
 
-Unfortunately, these challenges apply to `match ... end` cases as well.
+Unfortunately, these challenges apply to `match ... end` patterns as well.
 
-# But what about standard library functions?
+# What about standard library functions?
 
-The standard library provides several useful combinators for working with tuples. This is especially true of list combinators, such as [`combine`](https://coq.inria.fr/library/Coq.Lists.List.html#combine).
+The standard library provides several useful combinators for working with tuples. This is especially true of list functions such as [`combine`](https://coq.inria.fr/library/Coq.Lists.List.html#combine).
 
 However, the benefit of reusing these combinators is outweighed by the cost of maintaining code that relies too heavily on tuples.
 
@@ -196,7 +197,13 @@ In my experience, you're going to need to define some helper lemmas _no matter w
 
 # Can I use tuples internally but expose a non-tuple interface publicly?
 
-If you really want to, sure. You can do this with type classes, modules, opaque definitions, etc.
+If you really want to, sure. There are several ways to hide tuples:
+
+* Type classes
+* Modules
+* Opaque definitions
+
+However, these approaches won't get you the benefits of structure syntax for construction and pattern matching. Keep this in mind as you design your public interface.
 
 (If you've had success with this, please reach out!)
 
@@ -212,7 +219,7 @@ If you really want to, sure. You can do this with type classes, modules, opaque 
     * Tuples force you to write your own projections. This is tedious.
     * Structures provide projections automatically.
 * Matching & destructing
-    * Tuples are hard to match & destruct again due to their shape.
-    * Structures are easier to destruct and even easier to `match`.
+    * Tuples are hard to match & destruct due to their shape.
+    * Structures are easier to destruct and even easier to `match ... end`.
 
 Structures are better than tuples.
