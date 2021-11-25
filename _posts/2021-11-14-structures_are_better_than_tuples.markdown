@@ -1,6 +1,6 @@
 ---
 author: Tim Carstens
-title:  "Structures are better than tuples"
+title:  "Records are better than tuples"
 date:   2021-11-14 22:00:00 -0800
 categories: coq best-practices
 ---
@@ -29,12 +29,12 @@ These types all suffer from the same maintenance problems:
 
 In a collaborative engineering context it is imperative that we prioritize readability & maintainability. Excessive use of tuples works against this by making it harder for people to read, understand, maintain, and contribute to code.
 
-Fortunately, tuples of all kinds can be replaced by `Structure`. Let's look at an example:
+Fortunately, tuples of all kinds can be replaced by `Record`. Let's look at an example:
 
-# Structures are great
+# Records are great
 
 ```coq
-Structure Pointer: Type := {
+Record Pointer: Type := {
     pointer_base: Z;
     pointer_offset: Z;
     pointer_offset__align: Zmod pointer_offset 8 = 0;
@@ -47,7 +47,7 @@ Now let me ask:
 * Don't you love how readable it is?
 * Did you notice how _informative_ and _consistent_ the names are?
   * Did you notice the different conventions (`CamelCase` versus `snake_case`) for types and projections?
-  * Can you guess the relationship between the name of the structure and the name of the projections?
+  * Can you guess the relationship between the name of the record and the name of the projections?
   * Can you guess why `_` is used in some places and `__` in others?
   * When `__` is used, what do you notice about the stuff that comes before `__`? What about the stuff that comes after?
   * What does `` grep -n 'pointer_' `find ./ -name "*.v"` `` do?
@@ -57,7 +57,7 @@ Now let me ask:
 
 Anyway, let's try building one of these things.
 
-The special structure syntax (together with either `refine` or `Program Definition`) yields code that is _extremely_ easy to maintain:
+The special record syntax (together with either `refine` or `Program Definition`) yields code that is _extremely_ easy to maintain:
 
 ```coq
 (* Using refine *)
@@ -84,7 +84,7 @@ Next Obligation. (* pointer_offset__nonneg ... *) Qed.
 
 So readable. So maintainable.
 
-But that's not all! Structures also interact nicely with `match ... end`. In this next example we match on _some_ of the structure's fields:
+But that's not all! Records also interact nicely with `match ... end`. In this next example we match on _some_ of the records's projections:
 
 ```coq
 Definition pointer_base_is_zero (x: Pointer):
@@ -137,10 +137,10 @@ Definition Build_HorribleDisaster (b o: Z)
  := (b, exist _ o (conj Ho_align Ho_nonneg)).
 ```
 
-This constructor can be used with `apply` and `Program Define`. However, since it does not have named fields, it is not as pleasant to use as the special structure syntax:
+This constructor can be used with `apply` and `Program Define`. However, since it does not have named fields, it is not as pleasant to use as the special record syntax:
 * The code is less intentional and therefore harder to casually read than its syntactic counterpart.
 * It will be tedious to modify if we ever want to add another field to our type.
-* Nothing about this code jumps out as "building a structure:" if you were scrolling by quickly, it'd look like any other function or lemma.
+* Nothing about this code jumps out as "building a record:" if you were scrolling by quickly, it'd look like any other function or lemma.
 
 Take a look:
 
@@ -183,7 +183,7 @@ Qed.
 This is bad:
 * Even when it all fits on one line, there's no pretty way to format it. Tuples are all about _pairs_, and if you have more than 2 things you care about, you're going to have a problem making the `[` and `]` look nice.
 * If we ever need to add a field to the `HorribleDisaster` type, this pattern would be obnoxious to edit.
-* This pattern is 10 lines long (in contrast to the definition of the `Pointer` structure, which is only 6 lines long.)
+* This pattern is 10 lines long (in contrast to the definition of the `Pointer` record, which is only 6 lines long.)
 
 Unfortunately, these challenges apply to `match ... end` patterns as well.
 
@@ -203,7 +203,7 @@ If you really want to, sure. There are several ways to hide tuples:
 * Modules
 * Opaque definitions
 
-However, these approaches won't get you the benefits of structure syntax for construction and pattern matching. Keep this in mind as you design your public interface.
+However, these approaches won't get you the benefits of record syntax for construction and pattern matching. Keep this in mind as you design your public interface.
 
 (If you've had success with this, please reach out!)
 
@@ -211,15 +211,15 @@ However, these approaches won't get you the benefits of structure syntax for con
 
 * Communicating intent
     * Tuples obfuscate intent by filling code with generic projections & constructors (`fst`, `proj1`, `proj1_sig`, `conj`, `exist`, etc).
-    * Structures communicate intent through named fields.
+    * Records communicate intent through named fields.
 * Construction
     * Tuples are hard to construct because they're often the wrong "shape" for the data.
-    * Structures are easy to construct because there's a special syntax for doing so.
+    * Records are easy to construct because there's a special syntax for doing so.
 * Projection
     * Tuples force you to write your own projections. This is tedious.
-    * Structures provide projections automatically.
+    * Records provide projections automatically.
 * Matching & destructing
     * Tuples are hard to match & destruct due to their shape.
-    * Structures are easier to destruct and even easier to `match ... end`.
+    * Records are easier to destruct and even easier to `match ... end`.
 
-Structures are better than tuples.
+Records are better than tuples.
