@@ -73,6 +73,8 @@ feature_row4:
 
 <!-- {% include feature_row id="feature_row4" type="center" %} -->
 
+
+<!--
 # Recent posts
 
 {% assign entries_layout = page.entries_layout | default: 'list' %}
@@ -81,3 +83,4 @@ feature_row4:
     {% include archive-single.html type=entries_layout %}
   {% endfor %}
 </div>
+-->

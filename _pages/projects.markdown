@@ -3,10 +3,8 @@ title: Projects
 permalink: /projects/
 ---
 
-## applied.fm Style Guide for Coq
+## vstyle: A style guide guide for Coq
 
-A practical style guide for Coq-centric projects.
-
-* Latest version can be found at [vstyle.readthedocs.io](https://vstyle.readthedocs.io/)
+* The latest version can be viewed at [vstyle.readthedocs.io](https://vstyle.readthedocs.io)
 * Project page on [readthedocs.io](https://readthedocs.org/projects/vstyle/)
 * Repo on [GitHub](https://github.com/appliedfm/vstyle)
