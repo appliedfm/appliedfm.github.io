@@ -12,7 +12,7 @@ permalink: /resources/
 
 ### Community
 
-* [Coq on Zulip](http://coq.zulipchat.com/)
+* [Coq on Zulip](https://coq.zulipchat.com/)
 * [@CoqLang on Twitter](https://twitter.com/CoqLang)
 
 ### Downloads
