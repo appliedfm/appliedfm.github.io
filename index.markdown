@@ -7,7 +7,7 @@ header:
   actions:
     - label: "About Us"
       url: "/about/"
-  caption: "Photo by [Ram Kumar](https://unsplash.com/@ramkumar810) on Unsplash"
+  caption: "Photo by [Ilona Frey](https://unsplash.com/@couleuroriginal) on Unsplash"
 excerpt: "Supporting open source projects in the Coq ecosystem."
 
 intro: 
