@@ -26,6 +26,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://applied.fm" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: appliedfm
 github_username:  appliedfm
+logo: "/assets/images/logo-192x192.png"
 
 permalink: /blog/:categories/:year/:month/:day/:title.html
 
@@ -64,25 +65,13 @@ defaults:
       type: pages
     values:
       layout: single
-      author_profile: false
-
-author:
-  name: "applied.fm"
-  # avatar: "/assets/images/bio-photo.jpg"
-  bio: "Supporting open source projects in the Coq ecosystem" # Note: Markdown is allowed
-  links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/intoverflow"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/appliedfm"
+      author_profile: true
 
 footer:
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/intoverflow"
+      url: "https://twitter.com/appliedfm"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/appliedfm"

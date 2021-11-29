@@ -1,4 +1,5 @@
 ---
+author: "applied.fm"
 title: Projects
 permalink: /projects/
 ---

@@ -46,10 +46,10 @@ feature_row3:
   - image_path: /assets/images/rooster-unsplash-fabian-joy.jpg
     image_caption: "[Fabian Joy](https://unsplash.com/@fab_joy) on Unsplash"
     alt: "Image of a rooster"
-    title: "Placeholder Image Right Aligned"
-    excerpt: 'This is some sample content that goes here with **Markdown** formatting. Right aligned with `type="right"`'
-    url: "#test-link"
-    btn_label: "Read More"
+    title: "vstyle: a style guide for Coq"
+    excerpt: 'Style is a highly visible property of open source software. It impacts most of the workflows involving source code. *Good* style makes projects more efficient by accounting for those workflows. We are organizing an effort to document the best practices for projects in the Coq ecosystem.'
+    url: "https://vstyle.readthedocs.io"
+    btn_label: "Learn More"
     btn_class: "btn--primary"
 
 feature_row4:
@@ -69,7 +69,7 @@ feature_row4:
 
 <!-- {% include feature_row id="feature_row2" type="left" %} -->
 
-<!-- {% include feature_row id="feature_row3" type="right" %} -->
+{% include feature_row id="feature_row3" type="right" %}
 
 <!-- {% include feature_row id="feature_row4" type="center" %} -->
 

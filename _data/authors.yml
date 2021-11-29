@@ -1,3 +1,14 @@
+applied.fm:
+  name: "applied.fm"
+  bio: "Supporting open source projects in the Coq ecosystem"
+  links:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/appliedfm"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/appliedfm"
+
 Tim Carstens:
   name: "Tim Carstens"
   bio: "Supporting open source projects in the Coq ecosystem"

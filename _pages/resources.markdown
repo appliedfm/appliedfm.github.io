@@ -1,4 +1,5 @@
 ---
+author: "applied.fm"
 title: Resources
 permalink: /resources/
 ---
