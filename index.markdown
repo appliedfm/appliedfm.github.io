@@ -47,7 +47,7 @@ feature_row3:
     image_caption: "[Fabian Joy](https://unsplash.com/@fab_joy) on Unsplash"
     alt: "Image of a rooster"
     title: "vstyle: a style guide for Coq"
-    excerpt: 'Style is a highly visible property of open source software. It impacts most of the workflows involving source code. *Good* style makes projects more efficient by accounting for those workflows. We are organizing an effort to document the best practices for projects in the Coq ecosystem.'
+    excerpt: 'Style is a highly visible property of open source software. It impacts most of the workflows involving source code. *Good* style improves productivity by accounting for those workflows. To bring the benefits of good style to the masses, we are working with the community to identify & document the best practices for open source projects in the Coq ecosystem.'
     url: "https://vstyle.readthedocs.io"
     btn_label: "Learn More"
     btn_class: "btn--primary"
