@@ -28,6 +28,10 @@ permalink: /resources/
 * [Coq topic on GitHub](https://github.com/topics/coq)
 * [Recent GitHub Activity](https://github.com/search?o=desc&q=language%3Acoq&s=updated&type=Repositories)
 
+### Industrial users
+
+* [practical-fm](https://github.com/ligurio/practical-fm): A List of companies that use formal verification methods in software engineering
+
 ### Books
 
 * [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
