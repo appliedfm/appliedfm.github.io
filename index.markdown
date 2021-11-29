@@ -20,7 +20,7 @@ feature_row:
     title: "Placeholder 1"
     excerpt: "This is some sample content that goes here with **Markdown** formatting."
   - image_path: /assets/images/rooster-unsplash-ram-kumar.jpg
-    image_caption: "[Ilona Frey](https://unsplash.com/@couleuroriginal) on Unsplash"
+    image_caption: "[Ram Kumar](https://unsplash.com/@ramkumar810) on Unsplash"
     alt: "Image of a rooster"
     title: "Placeholder 2"
     excerpt: "This is some sample content that goes here with **Markdown** formatting."
