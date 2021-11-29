@@ -3,27 +3,35 @@ title: Resources
 permalink: /resources/
 ---
 
-## Community
+## By applied.fm
+
+* [vstyle: A style guide for Coq](https://vstyle.readthedocs.io)
+
+## Other resources
+
+### Community
 
 * [Coq on Zulip](http://coq.zulipchat.com/)
+* [@CoqLang on Twitter](https://twitter.com/CoqLang)
 
-## Downloads
+### Downloads
 
 * [Coq](https://coq.inria.fr/download)
 * [Coq Platform](https://github.com/coq/platform)
 * [Docker image](https://hub.docker.com/r/coqorg/coq/)
 
-## Open source libraries
+### Open source libraries
 
 * [Awesome Coq Projects](https://github.com/coq-community/awesome-coq#readme)
-* [Recent GitHub Activity](https://github.com/search?o=desc&q=language%3Acoq&s=updated&type=Repositories)
 * [Coq packages in opam](https://coq.inria.fr/opam/www/)
+* [Coq topic on GitHub](https://github.com/topics/coq)
+* [Recent GitHub Activity](https://github.com/search?o=desc&q=language%3Acoq&s=updated&type=Repositories)
 
-## Books
+### Books
 
 * [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
 * [Certified Programming with Dependent Types](http://adam.chlipala.net/cpdt/)
 
-## Domain-specific books
+### Domain-specific books
 
 * [Formal Reasoning About Programs](http://adam.chlipala.net/frap/)
