@@ -24,7 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Supporting open source projects in the Coq ecosystem.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://applied.fm" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: intoverflow
+twitter_username: appliedfm
 github_username:  appliedfm
 
 permalink: /blog/:categories/:year/:month/:day/:title.html
