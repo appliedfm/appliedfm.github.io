@@ -36,10 +36,10 @@ feature_row2:
   - image_path: /assets/images/rooster-unsplash-ben-hummitzsch.jpg
     image_caption: "[Ben Hummitzsch](https://unsplash.com/@benhumee) on Unsplash"
     alt: "Image of a rooster"
-    title: "Placeholder Image Left Aligned"
-    excerpt: 'This is some sample content that goes here with **Markdown** formatting. Left aligned with `type="left"`'
-    url: "#test-link"
-    btn_label: "Read More"
+    title: "FM Growth"
+    excerpt: 'We are measuring the growth of formal methods in open source communities.'
+    url: "https://growth.applied.fm"
+    btn_label: "Read the Report"
     btn_class: "btn--primary"
 
 feature_row3:
@@ -67,7 +67,7 @@ feature_row4:
 
 <!-- {% include feature_row %} -->
 
-<!-- {% include feature_row id="feature_row2" type="left" %} -->
+{% include feature_row id="feature_row2" type="left" %}
 
 {% include feature_row id="feature_row3" type="right" %}
 
